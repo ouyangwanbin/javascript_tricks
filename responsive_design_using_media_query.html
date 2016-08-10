@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Responsive Web Design</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <style type="text/css">
+    body {
+        padding: 0;
+        margin-top: 8px;
+    }
+    
+    li {
+        list-style: none;
+        float: left;
+    }
+    
+    .header {
+        width: 100%;
+        margin: 0 auto;
+        max-width: 1200px;
+        height: 40px;
+        background-color: #4e4e4e;
+    }
+    
+    .logo {
+        margin: 0 auto;
+        float: left;
+        width: 15%;
+        height: 40px;
+        text-indent: -1000px;
+        background: url(images/logo.jpg) no-repeat;
+        background-size: 100% 100%;
+    }
+    
+    .nav {
+        float: right;
+        margin: 0 0;
+        width: 70%;
+    }
+    
+    .nav ul {
+        width: 100%;
+        margin: 0 0;
+        padding: 0 0;
+        float: right;
+    }
+    
+    .menu {
+        display: none;
+    }
+    
+    .nav li {
+        width: 18%;
+        padding: 0px 5px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+    }
+    
+    .nav a {
+        text-decoration: none;
+        color: #fff;
+    }
+    
+    .nav li:hover {
+        background-color: #cccccc;
+    }
+    
+    .content {
+        max-width: 1200px;
+        background-color: #e6e6e6;
+        margin: 10px auto;
+    }
+    
+    .content:after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+    
+    .content li {
+        width: 21%;
+        margin-top: 2px;
+        margin-right: 4%;
+    }
+    
+    .content li h3,
+    h4 {
+        margin: 0 auto;
+        text-align: center;
+        width: 100%;
+    }
+    
+    .content li img {
+        width: 100%;
+    }
+    
+    @media screen and ( max-width: 992px) {
+        .header {
+            height: 80px;
+        }
+        .logo {
+            margin: 0 auto;
+            float: none;
+            height: 40px;
+            text-indent: -1000px;
+            background: url(images/logo.jpg) no-repeat;
+            background-size: 100% 100%;
+        }
+        .nav {
+            float: none;
+            height: 40px;
+            width: 100%;
+        }
+        .content li {
+            width: 44%;
+            margin-top: 2px;
+            margin-right: 5%;
+        }
+    }
+    
+    @media screen and ( max-width: 600px) {
+        .nav {
+            float: none;
+            height: 40px;
+            width: 100%;
+        }
+        .menu {
+            display: block;
+            float: right;
+            height: 40px;
+            cursor: pointer;
+        }
+        
+        .menu img{
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .nav ul {
+            display: none;
+            background-color: #4e4e4e;
+        }
+        .nav li {
+            float: none;
+            text-align: center;
+            width: 100%;
+        }
+        .content li {
+            width: 95%;
+            margin-top: 2px;
+            margin-right: 5%;
+        }
+    }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1 class="logo">
+            green
+        </h1>
+        <div class="nav">
+            <div class="menu" id="menu">
+                <img src="images/menu.png">
+            </div>
+            <ul id="dropdown">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">News</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Careers</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        <ul>
+            <li>
+                <h3>shrimp</h3>
+                <img src="images/shrimps.jpg" alt="">
+                <h4>$15.00</h4>
+            </li>
+            <li>
+                <h3>shrimp</h3>
+                <img src="images/shrimps.jpg" alt="">
+                <h4>$15.00</h4>
+            </li>
+            <li>
+                <h3>shrimp</h3>
+                <img src="images/shrimps.jpg" alt="">
+                <h4>$15.00</h4>
+            </li>
+            <li>
+                <h3>shrimp</h3>
+                <img src="images/shrimps.jpg" alt="">
+                <h4>$15.00</h4>
+            </li>
+        </ul>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.12.3.js"   integrity="sha256-1XMpEtA4eKXNNpXcJ1pmMPs8JV+nwLdEqwiJeCQEkyc="   crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#menu").click(function(){
+                $("#dropdown").toggle();
+            })
+        });
+    </script>
+</body>
+
+</html>
