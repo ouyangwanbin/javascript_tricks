@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+    body{
+        height:2000px;
+        width: 1500px;
+    }
+    </style>
+</head>
+<body>
+    <script type="text/javascript">
+        var showInfo = function( ){
+            var visibleWidth = document.body.offsetWidth; //include all borders
+            var visibleHeight = document.body.offsetHeight;
+            var fullWidth = document.body.clientWidth;
+            var fullHeight = document.body.clientHeight;
+            var scrollLeft = document.body.scrollLeft;
+            var scrollTop = document.body.scrollTop;
+
+
+            console.log( "visibleWidth : " + visibleWidth );
+            console.log( "visibleHeight : " + visibleHeight );
+            console.log( "fullWidth : " + fullWidth );
+            console.log( "fullHeight : " + fullHeight );
+            console.log( "scrollLeft : " + scrollLeft );
+            console.log( "scrollTop : " + scrollTop );
+        }
+        showInfo( );
+        window.addEventListener("resize",showInfo);
+    </script>
+</body>
+
+</html>

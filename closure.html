@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <div id="container" style="width:100%; height:1500px; background-color:gray;">
+    </div>
+</body>
+<script type="text/javascript">
+var container = document.getElementById("container");
+
+for (var i = 0; i < 5; i++) {
+    var btn = document.createElement("button");
+    btn.innerHTML = i;
+    btn.addEventListener("click",(function( i ){
+        return function( ){
+            alert( i );
+        }
+    }(i)));
+    container.appendChild(btn);
+}
+</script>
+
+</html>

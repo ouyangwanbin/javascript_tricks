@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+</body>
+<script type="text/javascript">
+
+
+    var immutableObj1 = (function(){
+        var immutablePro = 45;
+        return {
+            getObj : function( ){
+                return immutablePro;
+            }
+        }
+    }());
+
+    //will not change the private properties.
+    immutableObj1.immutablePro = 75;
+
+    console.log( immutableObj1.getObj( ) );
+
+
+    //EMAC SCRIPT 5
+    var immutableObj2 = {};
+
+    Object.defineProperty( immutableObj2,"immutablePro",{
+        value:100,
+        writable:false
+    });
+
+    console.log( immutableObj2.immutablePro );
+    immutableObj2.immutablePro = 80;
+    console.log( immutableObj2.immutablePro );
+</script>
+
+</html>

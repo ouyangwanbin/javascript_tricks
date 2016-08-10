@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Auto Complete</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+    body {
+        margin: 0px;
+        padding: 0px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <form role="form">
+                <div class="form-group" style="position:relative;">
+                    <input type="text" class="form-control" id="search">
+                    <div id="list" class="list-group" style="display:none;position:absolute;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="add" placeholder="add words">
+                    <button type="button" class="btn btn-default" id="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript">
+    var dictation = (function() {
+
+        function Node(val) {
+            this.val = val;
+            this.word = null;
+            this.children = new Array(26);
+        }
+
+        var baseIndex = "a".charCodeAt(0);
+
+        var root = new Node("");
+
+        var insert = function(word) {
+            var cur = root;
+            for (var i = 0; i < word.length; i++) {
+                var index = word.charCodeAt(i) - baseIndex;
+                var children = cur.children;
+                if (!children[index]) {
+                    children[index] = new Node(word.charAt(i));;
+                }
+                cur = children[index];
+            }
+            cur.word = word;
+        }
+
+        var find = function(word) {
+            var cur = root;
+            for (var i = 0; i < word.length; i++) {
+                var index = word.charCodeAt(i) - baseIndex;
+                var children = cur.children;
+                if (!children[index]) {
+                    return false;
+                }
+                cur = children[index];
+            }
+            return cur;
+        }
+
+        var getAllWords = function(pre) {
+            var result = [];
+            var cur = find(pre);
+            if (cur) {
+                getWordsHelper(cur, result);
+            }
+            return result;
+        }
+
+        var getWordsHelper = function(cur, res) {
+            if (cur.word) {
+                res.push(cur.word);
+            }
+            cur.children.forEach(function(item) {
+                if (item) {
+                    getWordsHelper(item, res);
+                }
+            });
+        }
+
+        return {
+            insert: insert,
+            find: find,
+            getAllWords: getAllWords
+        }
+
+    }());
+
+    dictation.insert("book");
+    dictation.insert("look");
+    dictation.insert("good");
+    dictation.insert("bike");
+    dictation.insert("apple");
+    dictation.insert("orange");
+    dictation.insert("chart");
+    dictation.insert("different");
+    dictation.insert("energe");
+    dictation.insert("fluent");
+    dictation.insert("fluenting");
+    dictation.insert("friend");
+    dictation.insert("high");
+    dictation.insert("insurance");
+    dictation.insert("jeep");
+    dictation.insert("kitchen");
+    dictation.insert("loop");
+    dictation.insert("morning");
+    dictation.insert("node");
+    dictation.insert("opponent");
+    dictation.insert("question");
+    dictation.insert("resize");
+    dictation.insert("station");
+    dictation.insert("teacher");
+    dictation.insert("university");
+    dictation.insert("villa");
+    dictation.insert("weep");
+    dictation.insert("xreo");
+    dictation.insert("yellow");
+    dictation.insert("zillow");
+    dictation.insert("dog");
+
+    var search = document.getElementById("search");
+    var list = document.getElementById("list");
+    search.addEventListener("keyup", function(e) {
+        var word = this.value;
+        if( word.length === 0 ){
+            return;
+        }
+        var words = dictation.getAllWords(word);
+        while( list.firstChild ){
+            list.removeChild(list.firstChild);
+        }
+        if( words.length > 0 ){
+            list.style.display = "block";
+        }else{
+            list.style.display = "none";
+        }
+        words.forEach(function(item){
+            var btn = document.createElement("button");
+            btn.setAttribute("type","button");
+            btn.className = "list-group-item";
+            btn.innerHTML = item;
+            list.appendChild(btn);
+        });
+    });
+    var submitBtn = document.getElementById("submit");
+    var add = document.getElementById("add");
+    submitBtn.addEventListener("click", function(e) {
+        dictation.insert(add.value);
+    });
+    </script>
+</body>
+
+</html>

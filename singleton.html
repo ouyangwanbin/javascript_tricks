@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+</body>
+<script type="text/javascript">
+var mySingleTon = (function(window) {
+    var instance = null;
+
+    var SingleConstruct = function() {
+        var pro1;
+        var pro2;
+
+        var getPro1 = function() {
+            return pro1;
+        }
+
+        var setPro1 = function(p) {
+            pro1 = p;
+        }
+
+        var getPro2 = function() {
+            return pro2;
+        }
+
+        var setPro2 = function(p) {
+            pro2 = p;
+        }
+
+        return {
+            getPro1 : getPro1,
+            getPro2 : getPro2,
+            setPro1 : setPro1,
+            setPro2 : setPro2
+        }
+    }
+
+    var getInstance = function( ){
+        if( !instance ){
+            instance = SingleConstruct( );
+        }
+        return instance;
+    }
+
+    return {
+        getInstance : getInstance
+    }
+})(window);
+
+mySingleTon.getInstance().setPro1("pro1");
+var pro1 = mySingleTon.getInstance().getPro1();
+
+</script>
+
+</html>
