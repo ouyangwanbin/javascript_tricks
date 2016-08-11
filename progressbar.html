@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+    body {
+        margin: 0 auto;
+        padding: 0 0;
+    }
+    
+    #container {
+        width: 500px;
+        height: 40px;
+        border: 1px solid #000;
+    }
+    
+    #progress {
+        max-width: 100%;
+        width: 0px;
+        background: green;
+        height: 100%;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="progress">
+        </div>
+        <button onclick="start1( )"> setInterval start </button>
+        <button onclick="start2( )"> setTimeout start </button>
+    </div>
+    <script type="text/javascript">
+    var container = document.getElementById("container");
+    var containerWidth = container.clientWidth;
+    var progress = document.getElementById("progress");
+    var currentWidth = 0;
+    var timeId;
+    //1 using setInterval
+    var inc1 = function() {
+        if (currentWidth >= containerWidth) {
+            clearInterval(timeId);
+            return;
+        }
+        currentWidth++;
+        progress.style.width = currentWidth + 'px';
+    }
+
+    function start1() {
+        timeId = setInterval(function() {
+            inc1();
+        }, 10);
+    }
+
+
+    var inc2 = function( ){
+        if (currentWidth >= containerWidth) {
+            clearInterval(timeId);
+            return;
+        }
+        currentWidth++;
+        progress.style.width = currentWidth + 'px';
+        setTimeout( inc2, 10 );
+    }
+
+    function start2() {
+        setTimeout( function() {
+            inc2();
+        }, 10);
+    }
+
+    //2
+    </script>
+</body>
+
+</html>
