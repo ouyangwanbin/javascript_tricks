@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+</body>
+<script type="text/javascript">
+
+var person = {
+	name : "Wanbin",
+	sayWithArrow : function( ){
+		setTimeout(()=>{
+			console.log( this.name );
+		},1000);
+	},
+	say:function( ){
+		var self = this;
+		setTimeout( function( ){
+			console.log( self.name );
+		},1000 );
+	}
+}
+
+person.sayWithArrow( );
+
+</script>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>D3 BAR</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+    <style type="text/css">
+    body {
+        margin: 0 auto;
+        padding: 0 0;
+    }
+    
+    #container {
+        margin: 4% 10%;
+        padding: 0 0;
+        background-color: #d9d9d9;
+    }
+    
+    .bar {
+        background-color: blue;
+        width: 20px;
+        display: inline-block;
+        margin-left: 5px;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+    </div>
+    <script type="text/javascript">
+    var data = [4, 7, 2, 1, 5, 7, 2, 5, 7, 9, 5, 6];
+    var w = 800;
+    var h = 800;
+    var barWidth = 20;
+    var marginLeft = 5;
+    var base = d3.min( data )*100;
+    var svg = d3.select("#container").append("svg").attr("width",800).attr("height",800);
+
+    svg.selectAll("rect").data(data).enter( ).append("rect").attr("width",barWidth).attr("height",function(d){
+        return 100*d;
+    }).attr("x",function(d , i){
+        return i*(barWidth + 5);
+    }).attr("y",function( d ){
+        return barWidth;
+    }).attr("fill",function( ){
+        return "blue";
+    });
+
+    </script>
+</body>
+
+</html>

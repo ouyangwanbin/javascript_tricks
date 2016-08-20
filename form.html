@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Form</title>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <form id="sForm">
+            <div class="form-group">
+                userName :
+                <input type="text" class="form-control" id="userName" />
+            </div>
+            <div class="form-group">
+                Male:
+                <input type="radio" name="sex" class="form-control" value="1" /> 
+                Female:
+                <input type="radio" name="sex" class="form-control" value="2" />
+            </div>
+            <div class="form-group">
+                description:
+                <textarea class="form-control" id="description"></textarea>
+            </div>
+            <div class="form-group">
+                Birth Places:
+                <select class="form-control" name="places" id="pl">
+                    <option>CA</option>
+                    <option>NY</option>
+                    <option>ML</option>
+                </select>
+            </div>
+            <div class="form-group">
+                checkMe :
+                <input type="checkbox" class="form-control" id="check" />
+            </div>
+            <button type="button" class="btn btn-primary" id="submit">Submit</button>
+        </form>
+    </div>
+    <script type="text/javascript">
+        var userName = document.getElementById( "userName" );
+        var sexes = document.getElementsByName( "sex" );
+        var description = document.getElementById( "description" );
+        var places = document.getElementById( "pl" );
+        var checkMe = document.getElementById("check");
+        var btn = document.getElementById("submit");
+
+        btn.addEventListener("click",function( ){
+            console.log("userName : " + userName.value);
+            var sex;
+            for( var i=0; i<sexes.length; i++ ){
+                if( sexes[i].checked ){
+                    sex = sexes[i].value == "1" ? "Male":"Female";
+                    break;
+                }
+            }
+            console.log("sex : " + sex );
+            console.log("description: " + description.value );
+            console.log("birth place: " + places.value );
+            console.log("checkMe :" + checkMe.checked );
+        });
+
+        places.addEventListener("change",function( ){
+            console.log("you're choosing " + this.value );
+        });
+    </script>
+</body>
+
+</html>

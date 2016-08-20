@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+</body>
+<script type="text/javascript">
+var Person = (function() {
+    var privateSymbol = Symbol("age");
+    function Person( name, age ){
+        this.name = name;
+        this[privateSymbol] = age;
+    }
+
+    Person.prototype.getName = function( ){
+        return this.name;
+    }
+
+    Person.prototype.getAge = function( ){
+        return this[privateSymbol];
+    }
+    return Person;
+}());
+
+
+var p1 = new Person( "Wanbin" , 32 );
+console.log( p1 );
+
+</script>
+
+</html>

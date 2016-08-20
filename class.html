@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+</body>
+<script type="text/javascript">
+class Shape {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    getPosition() {
+        return this.x + ',' + this.y;
+    }
+
+    static getArea(x, y) {
+        return x * y;
+    }
+}
+
+const s = new Shape(1, 2);
+console.log(s.getPosition());
+console.log(Shape.getArea(s.x, s.y));
+
+
+function Animal(name) {
+    this.name = name;
+}
+
+Animal.prototype.speak = function() {
+    console.log(this.name + ' makes a noise.');
+}
+
+class Dog extends Animal {
+    speak() {
+        super.speak();
+        console.log(this.name + ' barks.');
+    }
+}
+
+var d = new Dog('Mitzie');
+d.speak();
+
+
+function Cat(name) {
+    Animal.call(this, name);
+}
+
+Cat.prototype = Object.create(Animal.prototype);
+Cat.prototype.constructor = Cat;
+
+var c = new Cat('MIAO');
+c.speak();
+</script>
+
+</html>
