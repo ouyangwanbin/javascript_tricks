@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Router</title>
+    <meta name="viewport" content="width=device-width">
+    <meta charset="uft-8">
+</head>
+
+<body>
+    <ul>
+        <li>
+            <a href="#">HOME</a>
+        </li>
+        <li>
+            <a href="#/career">CAREER</a>
+        </li>
+        <li>
+            <a href="#/contact">CONTACT</a>
+        </li>
+    </ul>
+    <div id="content">
+        This is home!
+    </div>
+    <script type="text/javascript">
+    function Router() {
+        this.routes = {};
+        this.currentUrl = '';
+    }
+    Router.prototype.route = function(path, callback) {
+        this.routes[path] = callback || function() {};
+    };
+    Router.prototype.refresh = function() {
+        this.currentUrl = location.hash.slice(1) || '/';
+        this.routes[this.currentUrl]();
+    };
+    Router.prototype.init = function() {
+        window.addEventListener('load', this.refresh.bind(this), false);
+        window.addEventListener('hashchange', this.refresh.bind(this), false);
+    }
+    window.Router = new Router();
+    window.Router.init();
+
+    var content = document.getElementById('content');
+   	Router.route('/',function( ){
+   		content.innerHTML = 'This is home!';
+   	});
+   	Router.route('/career',function( ){
+   		content.innerHTML = 'This is career!';
+   	})
+   	Router.route('/contact',function( ){
+   		content.innerHTML = 'This is contact!';
+   	})
+    </script>
+</body>
+
+</html>
