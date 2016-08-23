@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Angular Form</title>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        input.ng-touched.ng-invalid{
+            border: 2px solid red;
+        }
+    </style>
+</head>
+
+<body ng-app="angularFormApp">
+    <div class="container" ng-controller="formController" >
+        <form id="sForm" ng-submit="submit()" name="contactForm" novalidate>
+            <div class="form-group">
+                userName :
+                <input type="text" class="form-control" name="userName" ng-model="user.name" ng-required="true"/>
+                <span ng-show="contactForm.userName.$touched && contactForm.userName.$invalid">user name can not be empty!</span>
+            </div>
+            <div class="form-group">
+                Male:
+                <input type="radio" name="sex" class="form-control" value="M" ng-model="user.sex" ng-checked="true" /> 
+                Female: 
+                <input type="radio" name="sex" class="form-control" value="F" ng-model="user.sex"/>
+            </div>
+            <div class="form-group">
+                description:
+                <textarea class="form-control" id="description" ng-model="user.description"></textarea>
+            </div>
+            <div class="form-group">
+                Birth Places:
+                <select class="form-control" name="places" id="pl" ng-model="user.birthPlace" ng-required="true">
+                    <option>CA</option>
+                    <option>NY</option>
+                    <option>ML</option>
+                </select>
+            </div>
+            <div class="form-group">
+                checkMe :
+                <input type="checkbox" class="form-control" id="check" ng-model="user.isCheck"/>
+            </div>
+            <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+        </form>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+    <script type="text/javascript">
+        var angularFormApp = angular.module("angularFormApp",[]);
+        angularFormApp.controller("formController",["$scope",function($scope){
+            $scope.submit = function( ){
+                console.log( $scope.user.name );
+                console.log( $scope.user.sex );
+                console.log( $scope.user.description );
+                console.log( $scope.user.birthPlace );
+                console.log( $scope.user.isCheck );
+            }
+        }]);
+    </script>
+</body>
+
+</html>
