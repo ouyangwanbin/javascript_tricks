@@ -17,7 +17,7 @@
         border: 1px solid #000;
     }
     
-    #progress {
+    .progress {
         max-width: 100%;
         width: 0px;
         background: green;
@@ -25,6 +25,7 @@
         animation-name: progressMove;
         animation-duration:5s;
         animation-fill-mode:forwards;
+        animation-iteration-count:infinite;
     }
 
     @keyframes progressMove{
@@ -38,6 +39,21 @@
     <div id="container">
         <div id="progress"></div>
     </div>
+    <button id="start">start progress</button>
+    <button id="stop">stop progress</button>
+    <script type="text/javascript">
+        var start = document.getElementById("start");
+        var stop = document.getElementById("stop");
+        var progress = document.getElementById("progress");
+        var startClickFun = function( ){
+            progress.className = "progress";
+        }
+        var stopClickFun = function( ){
+            progress.className = "";
+        }
+        start.addEventListener("click",startClickFun.bind(start));
+        stop.addEventListener("click",stopClickFun.bind(stop));
+    </script>
 </body>
 
 </html>
