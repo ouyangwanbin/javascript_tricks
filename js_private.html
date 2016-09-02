@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>js_private</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+</body>
+<script type="text/javascript">
+
+//1 using var
+
+var Person1 = (function(){
+    var privateName;
+    var Person1 = function( name ){
+       privateName = name;
+    } 
+
+    Person1.prototype.getName = function( ){
+        return privateName;
+    }
+    return Person1;
+}());
+
+var p1 = new Person1( "wanbin1" );
+console.log(p1.getName( ));
+
+//2.using symbol
+
+var Person2 = (function(  ){
+    var privateNameSymbol = Symbol("name");
+    var Person2 = function( name ){
+        this[privateNameSymbol] = name;
+    }
+
+    Person2.prototype.getName = function( ){
+        return this[privateNameSymbol];
+    }
+    return Person2;
+
+}());
+
+var p2 = new Person2( "wenlin" );
+console.log(p2.getName( ));
+
+//3.using weakmap
+
+var Person3 = (function(){
+    var privateData = new WeakMap( );
+    var Person3 = function( name ){
+        privateData.set(this,{
+            privateName:name
+        });
+    }
+
+    Person3.prototype.getName = function( ){
+        return privateData.get(this).privateName;
+    }
+    return Person3;
+}());
+
+var p3 = new Person3( "dabinzi" );
+console.log( p3.getName( ) );
+
+
+</script>
+
+</html>
