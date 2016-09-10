@@ -13,22 +13,27 @@
         margin-top: 10px;
         margin-left: auto;
         margin-right: auto;
-        height: 50px;
-        width: 80%;
+        text-align: center;
     }
 
     nav{
+        margin: 0 auto;
+        height: 50px;
+        width: 80%;
         display: flex;
+        flex-wrap:wrap;
     }
     
     nav div {
         height: 50px;
         width: 24%;
+        min-width: 200px;
         text-align: center;
         line-height: 50px;
         cursor: pointer;
         border: 1px solid #eee;
         background: #f2f2f2;
+        flex-grow:1;
     }
     
     nav div:hover {
