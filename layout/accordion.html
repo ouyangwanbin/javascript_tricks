@@ -8,9 +8,9 @@
         margin: 0;
         padding: 0
     }
-
-    div h2{
-    	border-radius: 6px;
+    
+    div h2 {
+        border-radius: 6px;
     }
     
     .container {
@@ -20,11 +20,14 @@
         margin-right: auto;
         width: 60%;
         min-width: 600px;
+        height: 800px;
     }
     
     .container .box {
         width: 100%;
         margin: 0 auto;
+        max-height: 200px;
+        overflow: auto;
     }
     
     .container .box h2 {
@@ -33,20 +36,44 @@
         background: tomato;
         line-height: 50px;
         cursor: pointer;
-        padding-left:1%;
+        padding-left: 1%;
     }
-
-    .container .box h2:hover{
-    	background: purple;
-    	color: #fff;
+    
+    .container .box h2:hover {
+        background: purple;
+        color: #fff;
     }
-
-    active{
-        display: block;
+    
+    .container .box .content {
+        height: 0px;
     }
-
-    .inactive{
-        display: none;
+    
+    .inactive {
+        height: 200px;
+        animation: hide 1s forwards;
+    }
+    
+    .active {
+        height: 0px;
+        animation: show 1s forwards;
+    }
+    
+    @keyframes show {
+        from {
+            height: 0;
+        }
+        to {
+            height: 200px;
+        }
+    }
+    
+    @keyframes hide {
+        from {
+            height: 200px;
+        }
+        to {
+            height: 0;
+        }
     }
     </style>
 </head>
@@ -65,7 +92,7 @@
         </div>
         <div class="box">
             <h2>Content2</h2>
-            <div class="content inactive">
+            <div class="content">
                 This is content2
                 <br> This is content2
                 <br> This is content2
@@ -79,9 +106,8 @@
         </div>
         <div class="box">
             <h2>Content3</h2>
-            <div class="content inactive">
+            <div class="content">
                 This is content3
-                <br> This is content3
                 <br> This is content3
                 <br> This is content3
                 <br> This is content3
@@ -94,14 +120,8 @@
         </div>
         <div class="box">
             <h2>Content4</h2>
-            <div class="content inactive">
+            <div class="content">
                 This is content4
-                <br> This is content4
-                <br> This is content4
-                <br> This is content4
-                <br> This is content4
-                <br> This is content4
-                <br> This is content4
                 <br> This is content4
                 <br> This is content4
                 <br> This is content4
@@ -111,24 +131,30 @@
         </div>
     </div>
     <script type="text/javascript">
-        var container = document.getElementById("container");
-        var toggle = function( event ){
-            var e = event || window.event;
-            var element = e.target; 
-            if( element.tagName !== 'H2' ){
-                return;
-            }
-            if( element.nextElementSibling.className.indexOf( 'inactive' ) > 0 ){
-                var selected = document.querySelector('.active');
-                if( selected ){
-                    selected.className = selected.className.replace('active','inactive');    
-                }
-                element.nextElementSibling.className = element.nextElementSibling.className.replace('inactive','active');
-            }else{
-                element.nextElementSibling.className = element.nextElementSibling.className.replace('active','inactive');
-            }
+    var container = document.getElementById("container");
+    var toggle = function(event) {
+        var e = event || window.event;
+        var element = e.target;
+        if (element.tagName !== 'H2') {
+            return;
         }
-        container.addEventListener("click", toggle );
+        debugger;
+        if (element.nextElementSibling.className.indexOf('inactive') > 0 || element.nextElementSibling.className === "content") {
+            var selected = document.querySelector('.active');
+            if (selected) {
+                selected.className = selected.className.replace('active', 'inactive');
+            }
+            if (element.nextElementSibling.className === "content") {
+                element.nextElementSibling.className = 'content active';
+            } else {
+                element.nextElementSibling.className = element.nextElementSibling.className.replace('inactive', 'active');
+            }
+
+        } else {
+            element.nextElementSibling.className = element.nextElementSibling.className.replace('active', 'inactive');
+        }
+    }
+    container.addEventListener("click", toggle);
     </script>
 </body>
 
