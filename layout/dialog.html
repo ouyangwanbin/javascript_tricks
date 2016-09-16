@@ -4,103 +4,138 @@
 <head>
     <title>Dialog</title>
     <style type="text/css">
-    html,body{
-    	margin: 0;
-    	padding: 0;
-    	height: 100%;
-    }
-    *,*:before,*:after{
-    	box-sizing:border-box;
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
     }
     
-    .btn{
-    	background: #ff9999;
-    	width: 100px;
-    	min-width: 100px;
-    	text-align: center;
-    	height: 40px;
-    	line-height: 40px;
-    	cursor: pointer;
-    	border-radius: 5px;
-    	box-shadow: 5px 5px 5px #ccc;
+    *,
+    *:before,
+    *:after {
+        box-sizing: border-box;
     }
-
-    .btn:hover{
-    	background: #e60000;
-    	color: #fff;
+    
+    .btn {
+        background: #ff9999;
+        width: 100px;
+        min-width: 100px;
+        text-align: center;
+        height: 40px;
+        line-height: 40px;
+        cursor: pointer;
+        border-radius: 5px;
+        box-shadow: 5px 5px 5px #ccc;
     }
-
-    .mask{
-    	position: absolute;
-    	top:0;
-    	left:0;
-    	opacity: 0.5;
-    	background: #eee;
-    	width: 100%;
-    	height: 100%;
+    
+    .btn:hover {
+        background: #e60000;
+        color: #fff;
     }
-
-    .dialog{
-    	border: 1px solid #333333;
-    	border-radius: 5px;
-    	height: 100px;
-    	width: 30%;
-    	position: absolute;
-    	top:50%;
-    	left: 50%;
-    	margin-left: -10%;
-    	margin-top: -10%;
-    	text-align: center;
-    	cursor: move;
+    
+    .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0.5;
+        background: #eee;
+        width: 100%;
+        height: 100%;
     }
-
-    .dialog h3{
-    	margin: 0;
-    	background: lightblue;
+    
+    .dialog {
+        border: 1px solid #333333;
+        border-radius: 5px;
+        height: 100px;
+        width: 30%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -10%;
+        margin-top: -10%;
+        text-align: center;
+        cursor: move;
+        box-shadow: 5px 5px 5px #ccc;
+        position: relative;
     }
-
-    .dialog .content{
-    	margin:0;
-    	background: tomato;
-    	height:50px;
-    	line-height: 50px;
+    
+    .dialog h3 {
+        margin: 0;
+        background: lightblue;
     }
-
-    .dialog .close{
-    	float: right;
-    	width: 30%;
-    	height: 28px;
-    	line-height: 28px;
-    	text-align: center;
-    	cursor: pointer;
+    
+    .dialog .content {
+        margin: 0;
+        background: tomato;
+        height: 50px;
+        line-height: 50px;
     }
-
+    
+    .dialog .close {
+        float: right;
+        width: 30%;
+        height: 28px;
+        line-height: 28px;
+        text-align: center;
+        cursor: pointer;
+    }
     </style>
 </head>
+
 <body>
-	<div class="btn" id="open">open dialog</div>
+    <div class="btn" id="open">open dialog</div>
     <div class="mask" id="mask" style="display:none;"></div>
     <div class="dialog" id="dialog" style="display:none">
-    	<h3>Dialog</h3>
-    	<div class="content">
-    		This is Dialog content
-    	</div>
-    	<div class="close" id="close">close</div>
+        <h3>Dialog</h3>
+        <div class="content">
+            This is Dialog content
+        </div>
+        <div class="close" id="close">close</div>
     </div>
     <script type="text/javascript">
-    	var open = document.getElementById("open");
-    	var mask = document.getElementById("mask");
-    	var close = document.getElementById("close");
-    	var dialog = document.getElementById("dialog");
-    	open.addEventListener("click",function( ){
-    		mask.style.display="block";
-    		dialog.style.display="block";
-    	});
-    	close.addEventListener("click",function( ){
-    		mask.style.display="none";
-			dialog.style.display="none";
-    	});
+    var open = document.getElementById("open");
+    var mask = document.getElementById("mask");
+    var close = document.getElementById("close");
+    var dialog = document.getElementById("dialog");
+    open.addEventListener("click", function() {
+        mask.style.display = "block";
+        dialog.style.display = "block";
+    });
+    close.addEventListener("click", function() {
+        mask.style.display = "none";
+        dialog.style.display = "none";
+    });
 
+    var mousemoveHandle = function(e) {
+        var e = e || window.event;
+        var position = mouseCoords(e);
+        dialog.style.top = position.y + "px";
+        dialog.style.left = position.x + "px";
+    }
+
+    var mousedownHandle = function() {
+        document.addEventListener("mousemove",mousemoveHandle);
+        document.addEventListener("mouseup", function(e) {
+            this.removeEventListener("mousemove", mousemoveHandle);
+        })
+    }
+
+    //dialog move
+    dialog.addEventListener("mousedown", mousedownHandle);
+
+    function mouseCoords(ev) {
+        if (ev.pageX || ev.pageY) {
+            return {
+                x: ev.pageX,
+                y: ev.pageY
+            };
+        }
+        return {
+            x: ev.clientX + document.body.scrollLeft,
+            y: ev.clientY + document.body.scrollTop
+        };
+    }
     </script>
 </body>
 
