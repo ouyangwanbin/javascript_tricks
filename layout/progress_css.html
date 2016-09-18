@@ -25,6 +25,10 @@
         animation:progressMove 5s forwards infinite;
     }
 
+    .stop{
+        animation-play-state:paused;
+    }
+
     @keyframes progressMove{
         from{width: 0px;}
         to{width:100%;}
@@ -46,7 +50,7 @@
             progress.className = "progress";
         }
         var stopClickFun = function( ){
-            progress.className = "";
+            progress.className = progress.className + " stop";
         }
         start.addEventListener("click",startClickFun.bind(start));
         stop.addEventListener("click",stopClickFun.bind(stop));
