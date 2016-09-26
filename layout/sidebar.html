@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Sidebar</title>
+    <style type="text/css">
+    body {
+        background: #d7dde0;
+        margin: 0;
+        padding: 0;
+    }
+    
+    * {
+        box-sizing: border-box;
+    }
+    
+    .main {
+        margin: 0 auto;
+        text-align: center;
+    }
+    
+    .main h1 {
+        color: red;
+    }
+    
+    .sidebar {
+        position: absolute;
+        height: 800px;
+        min-width: 200px;
+        background: #d870d7;
+        top: 0;
+        left: 0;
+    }
+    
+    .sidebar .parent {
+        height: 40px;
+        width: 100%;
+        line-height: 40px;
+        text-align: center;
+        cursor: pointer;
+        border-bottom: 1px solid;
+        background: #2edbc7;
+    }
+    
+    .sidebar .parent:hover {
+        background: #c42727;
+    }
+    
+    .sidebar .item {
+        background: #fff;
+        text-align: center;
+    }
+    
+    .sidebar .item p {
+        margin: 0 auto;
+        height: 30px;
+        line-height: 30px;
+        cursor: pointer;
+    }
+    
+    .sidebar .item p:hover {
+        background: #ccc;
+    }
+    
+    .close {
+        display: none;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <h1>Test Page</h1>
+        <p>Romantic relationships are the spice of life, they make us feel alive in a way that nothing else can. Genuine romance exists when two people show that they care for each other through small acts of love and affection. We feel loved and cared for when we know that our significant other is thinking about how to give us the most pleasure. Romance is the key to keeping the sparks flying. Without it, any relationship will soon lose its shine. Source: http://www.familyfriendpoems.com/poems/love/</p>
+    </div>
+    <div class="sidebar close">
+        <div class="parent">
+            Root1
+        </div>
+        <div class="item">
+            <p>item1</p>
+            <p>item1</p>
+            <p>item1</p>
+            <p>item1</p>
+        </div>
+        <div class="parent">Root2</div>
+        <div class="item close">
+            <p>item2</p>
+            <p>item2</p>
+            <p>item2</p>
+            <p>item2</p>
+        </div>
+        <div class="parent">Root3</div>
+        <div class="item close">
+            <p>item3</p>
+            <p>item3</p>
+            <p>item3</p>
+            <p>item3</p>
+        </div>
+        <div class="parent">Root4</div>
+        <div class="item close">
+            <p>item4</p>
+            <p>item4</p>
+            <p>item4</p>
+            <p>item4</p>
+        </div>
+    </div>
+    <script type="text/javascript">
+    var sidebar = document.querySelector(".sidebar");
+
+    function mouseCoords(ev) {
+        if (ev.pageX || ev.pageY) {
+            return {
+                x: ev.pageX,
+                y: ev.pageY
+            };
+        }
+        return {
+            x: ev.clientX + document.body.scrollLeft,
+            y: ev.clientY + document.body.scrollTop
+        };
+    }
+
+    var toggle = function(e) {
+        var ev = e || window.event;
+        var ele = e.target;
+        if (ele.className === "parent") {
+            ele.nextElementSibling.classList.toggle("close");
+        }
+    }
+
+    sidebar.addEventListener("click", toggle);
+
+
+    var sideBarToggle = function(e) {
+        var ev = e || window.event;
+        if (mouseCoords(ev).x < 200) {
+            sidebar.classList.remove("close");
+        } else {
+            sidebar.classList.add("close");
+        }
+    }
+
+    document.addEventListener("mousemove", sideBarToggle);
+    </script>
+</body>
+
+</html>
