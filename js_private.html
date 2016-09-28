@@ -15,13 +15,15 @@
 //1 using var
 
 var Person1 = (function(){
-    var privateName;
+    var _privateNames = {};
+    var _uid = 0;
     var Person1 = function( name ){
-       privateName = name;
+        this.uid = _uid;
+        _privateNames[_uid++] = name;
     } 
 
     Person1.prototype.getName = function( ){
-        return privateName;
+        return _privateNames[this.uid];
     }
     return Person1;
 }());
