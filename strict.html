@@ -12,7 +12,13 @@
 <script type="text/javascript">
 "use strict";
 const PI = 3.14;
-PI = 155;// error
+PI = 155;// error, can not change constant value.
+
+globalval = "this is global";//error, globalVal is not defined.
+
+delete Object.prototype; // delete prototype is not allowed.
+
+var o = { p: 1, p: 2 }; // !!! syntax error, duplicate properties are not allowed.
 
 </script>
 
