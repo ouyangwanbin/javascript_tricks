@@ -8,4 +8,6 @@ Person.prototype.sayName = function( ){
 }
 
 var p1 = new Person("Wanbin", "Ouyang");
+var p2 = new Person("Wanchao", "Ouyang");
 p1.sayName();
+p2.sayName();
