@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+	<img data-src="http://i.cdn.turner.com/nba/nba/.element/media/2.0/teamsites/warriors/images/logo-warriorsground-1000.png" />
+</body>
+<script type="text/javascript">
+[].forEach.call(document.querySelectorAll("img"),function(img){
+	var source = img.getAttribute("data-src");
+	setTimeout(function(){
+		img.src=source;
+	},3000);	
+	img.onload=function(){
+		console.log("image is loaded...");
+	}
+});
+</script>
+</html>
