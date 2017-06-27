@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>copy</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+</body>
+<script type="text/javascript">
+
+var shallowCopy = function( src ){
+    var dest = {};
+    for( var prop in src ){
+        dest[prop] = src[prop];
+    }
+    return dest;
+}
+
+var deepCopy = function( src, dest ){
+    var dest = dest || {};
+    for( var prop in src ){
+        if( typeof src[prop] === "object" ){
+            dest[prop] = src[prop].constructor === Array?[]:{};
+            deepCopy( src[prop], dest[prop] );
+        }else{
+            dest[prop] = src[prop];
+        }
+    }
+    return dest;
+}
+
+var person = {
+    name:"Wanbin",
+    parents:["ShuangMei","JianQiao"],
+    age:18
+}
+
+
+</script>
+
+</html>
